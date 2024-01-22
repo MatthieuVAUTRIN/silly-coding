@@ -45,6 +45,7 @@ while running:
             # Calculate the position to blit the tile
             tile_x = x * TILE_SIZE
             tile_y = y * TILE_SIZE
+            print(f"tile_x: {tile_x}, tile_y: {tile_y}, tile_id: {tile_id}""")
 
             # Blit the tile from the tileset onto the screen
             screen.blit(tileset, (tile_x, tile_y), (tile_id * TILE_SIZE, 0, TILE_SIZE, TILE_SIZE))

@@ -1,4 +1,5 @@
 import pygame
+import numpy as np
 from pygame.locals import *
 
 class Game:
@@ -15,22 +16,17 @@ class Game:
         self.running = True
 
     def run(self):
+        self.load_map()
         while self.running:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     self.running = False
-            self.load_map()
         pygame.quit()
 
     def load_map(self):
         # Create a 2D array to represent your map
-        map_data = [
-            [0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2],
-            [0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2],
-            [0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2],
-            [0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2],
-            # Add more rows here
-        ]
+        map_data = np.random.randint(0,4,(int(self.H / self.TILE_SIZE), int(self.W / self.TILE_SIZE)))
+        
             # Draw the map
         for y, row in enumerate(map_data):
             for x, tile_id in enumerate(row):
@@ -38,7 +34,8 @@ class Game:
                 tile_x = x * self.TILE_SIZE
                 tile_y = y * self.TILE_SIZE
                 # Blit the tile from the tileset onto the screen
-                self.screen.blit(self.tileset, (tile_x, tile_y), (tile_id * self.TILE_SIZE, 0, self.TILE_SIZE, self.TILE_SIZE))
+                #print(f"tile_x: {tile_x}, tile_y: {tile_y}, tile_id: {tile_id}""")
+                self.screen.blit(self.tileset, (tile_x, tile_y),(tile_id * self.TILE_SIZE, 0, self.TILE_SIZE, self.TILE_SIZE))
 
         # Draw the grid
         for row in range(int(self.H/self.TILE_SIZE)):
@@ -49,7 +46,11 @@ class Game:
         # Update the display
         pygame.display.flip()
 
+#class TileMap:
+    
+
 
 tileset_path = "C:\\Users\\Acer\\Desktop\\GITHUB_REPO\\silly-coding\\wave_collapse_function\\tiles\\tilemap.png"
 game = Game(tileset_path,32)
 game.run()
+
